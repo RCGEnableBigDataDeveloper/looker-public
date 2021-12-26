@@ -7,7 +7,7 @@ var script = document.createElement("script");  // create a script DOM node
     //link.id   = cssId;
     link.rel  = 'stylesheet';
     link.type = 'text/css';
-    link.href = '/plugins/visualizations/test.css';
+    link.href = 'test.css.md';
     link.media = 'all';
     head.appendChild(script);
     head.appendChild(link);
