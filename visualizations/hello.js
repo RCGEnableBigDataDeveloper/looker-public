@@ -1,5 +1,5 @@
 var script = document.createElement("script");  // create a script DOM node
-  script.src = "/plugins/visualizations/module.js";
+  script.src = "/plugins/visualizations/js/test.js";
   script.type = "text/javascript"
   script.setAttribute('nonce', window.__webpack_nonce__)
  var head  = document.getElementsByTagName('head')[0];
@@ -7,7 +7,9 @@ var script = document.createElement("script");  // create a script DOM node
     //link.id   = cssId;
     link.rel  = 'stylesheet';
     link.type = 'text/css';
-    link.href = './css/test.css.md';
+    link.href = '/plugins/visualizations/css/test.css.md';
+    //link.href = './css/test.css.md';
+
     link.media = 'all';
     head.appendChild(script);
     head.appendChild(link);
@@ -24,7 +26,7 @@ looker.plugins.visualizations.add({
 
     create: function(element, config){
         console.log("in create")
-        console.log(crap)
+       test(1,2)
 
   var css = element.innerHTML = `
     <style>
