@@ -1,79 +1,100 @@
+var script = document.createElement("script");  // create a script DOM node
+  script.src = "/plugins/visualizations/module.js";
+  script.type = "text/javascript"
+  script.setAttribute('nonce', window.__webpack_nonce__)
+ var head  = document.getElementsByTagName('head')[0];
+    var link  = document.createElement('link');
+    //link.id   = cssId;
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = '/plugins/visualizations/test.css';
+    link.media = 'all';
+    head.appendChild(script);
+    head.appendChild(link);
+
+
+
 looker.plugins.visualizations.add({
-  // Id and Label are legacy properties that no longer have any function besides documenting
-  // what the visualization used to have. The properties are now set via the manifest
-  // form within the admin/visualizations page of Looker
-  id: "hello_world",
-  label: "Hello World",
-  options: {
-    font_size: {
-      type: "string",
-      label: "Font Size",
-      values: [
-        {"Large": "large"},
-        {"Small": "small"}
-      ],
-      display: "radio",
-      default: "large"
+
+    id: "isup_vis",
+
+    label: "isup visualization",
+
+    options: {},
+
+    create: function(element, config){
+        console.log("in create")
+        console.log(crap)
+
+  var css = element.innerHTML = `
+    <style>
+      .hello-world-vis {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+    </style>
+  `;
+
+  var container = element.appendChild(document.createElement("div"));
+  container.className = "hello-world-vis";
+
+  this._textElement = container.appendChild(document.createElement("div"));
+
+    },
+
+    updateAsync: function(data, element, config, queryResponse, details, done){
+
+      console.log("in update")
+
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+
+        .then(response => response.json())
+
+        .then(json => {
+
+
+
+
+        let html = '<table class="bordertable">';
+
+                        for( let dim of queryResponse.fields.dimensions){
+html += `<th>${dim.label}</th>`
+}
+
+                for(let row of data) {
+
+html+= '<tr>'
+                       for(let i=0; i<queryResponse.fields.dimensions.length; i++){
+
+                        var cell = row[queryResponse.fields.dimensions[i].name];
+
+                        html += `<td class=bordercell>${LookerCharts.Utils.htmlForCell(cell)}</td>` // json.title + "<br>";
+                      }
+html += '</tr>'
+                }
+
+
+                html += '</table>'
+                element.innerHTML = html;
+
+
+
+          //element.innerHTML = json.title
+          //          r = json.title;
+          //
+           done()
+          //
+           })
+
+
+
+
+
+
+
     }
-  },
-  // Set up the initial state of the visualization
-  create: function(element, config) {
 
-    // Insert a <style> tag with some styles we'll use later.
-    element.innerHTML = `
-      <style>
-        .hello-world-vis {
-          /* Vertical centering */
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          text-align: center;
-        }
-        .hello-world-text-large {
-          font-size: 72px;
-        }
-        .hello-world-text-small {
-          font-size: 18px;
-        }
-      </style>
-    `;
-
-    // Create a container element to let us center the text.
-    var container = element.appendChild(document.createElement("div"));
-    container.className = "hello-world-vis";
-
-    // Create an element to contain the text.
-    this._textElement = container.appendChild(document.createElement("div"));
-
-  },
-  // Render in response to the data or settings changing
-  updateAsync: function(data, element, config, queryResponse, details, done) {
-
-    // Clear any errors from previous updates
-    this.clearErrors();
-
-    // Throw some errors and exit if the shape of the data isn't what this chart needs
-    if (queryResponse.fields.dimensions.length == 0) {
-      this.addError({title: "No Dimensions", message: "This chart requires dimensions."});
-      return;
-    }
-
-    // Grab the first cell of the data
-    var firstRow = data[0];
-    var firstCell = firstRow[queryResponse.fields.dimensions[0].name];
-
-    // Insert the data into the page
-    this._textElement.innerHTML = LookerCharts.Utils.htmlForCell(firstCell);
-
-    // Set the size to the user-selected size
-    if (config.font_size == "small") {
-      this._textElement.className = "hello-world-text-small";
-    } else {
-      this._textElement.className = "hello-world-text-large";
-    }
-
-    // We are done rendering! Let Looker know.
-    done()
-  }
-});
+  });
