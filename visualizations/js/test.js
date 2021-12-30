@@ -41,7 +41,7 @@ looker.plugins.visualizations.add({
   `;
 
   var container = element.appendChild(document.createElement("div"));
-  container.className = "hello-world-vis";
+  container.className = "bordercell";
 
   this._textElement = container.appendChild(document.createElement("div"));
 
@@ -60,7 +60,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
 
 
 
-        let html = '<table class="bordertable">';
+        let html = '<table class="bordertable" border=1>';
 
                         for( let dim of queryResponse.fields.dimensions){
 html += `<th>${dim.label}</th>`
