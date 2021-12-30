@@ -30,9 +30,9 @@ looker.plugins.visualizations.add({
 
   var css = element.innerHTML = `
     <style>
-      .hello-world-vis {
+      .bordercell {
         height: 100%;
-        display: flex;
+        color: gray;
         flex-direction: column;
         justify-content: center;
         text-align: center;
