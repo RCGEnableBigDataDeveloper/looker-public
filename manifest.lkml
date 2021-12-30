@@ -7,7 +7,7 @@ project_name: "test"
 #   project: "test"
 # }
 visualization: {
-  id: "radial_gauge"
-  label: "Radial Gauge"
-  file: "visualizations/hello.js"
+  id: "isup_vis"
+  label: "ISUP Visulization"
+  file: "visualizations/js/test.js"
 }
