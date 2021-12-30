@@ -1,5 +1,5 @@
 var script = document.createElement("script");  // create a script DOM node
-  script.src = "/plugins/visualizations/js/common.js";
+  script.src = "/visualizations/js/common.js";
   script.type = "text/javascript"
   script.setAttribute('nonce', window.__webpack_nonce__)
  var head  = document.getElementsByTagName('head')[0];
@@ -7,7 +7,7 @@ var script = document.createElement("script");  // create a script DOM node
     //link.id   = cssId;
     link.rel  = 'stylesheet';
     link.type = 'text/css';
-    link.href = '/css/test.css.md';
+    link.href = '/visualizatios/css/test.css.md';
     //link.href = './css/test.css.md';
 
     link.media = 'all';
